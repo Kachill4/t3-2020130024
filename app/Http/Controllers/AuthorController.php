@@ -105,4 +105,27 @@ class AuthorController extends Controller
         return redirect()->route('authors.index')
                 ->with('success', "Profile  {$author['nama']}  berhasil di hapus!");
     }
+
+    public function insert()
+    {
+        $author = Author::find(1);
+
+        $author->books()->createMany([
+            //isinya array asosiatif
+            [
+                "judul" => "buku x",
+                "halaman" => 10,
+                "kategori" => "Action",
+                "penerbit" => "Aniplex"
+            ],
+            [
+                "judul" => "buku y",
+                "halaman" => 50,
+                "kategori" => "Action",
+                "penerbit" => "Aniplex"
+            ]
+        ]);
+
+        echo "Data buku baru milik $author->nama sudah masuk yey!";
+    }
 }
