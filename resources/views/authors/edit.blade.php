@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('judul', 'Edit book')
+@section('nama', 'Edit author')
 
 @section('content')
-    <h2>Update New book</h2>
-    <form action="{{ route('books.update', ['book' => $book->id]) }}" method="POST">
+    <h2>Update New author</h2>
+    <form action="{{ route('authors.update', ['author' => $author->id]) }}" method="POST">
         @method('PATCH')
         @csrf
         <div class="row">
@@ -12,18 +12,18 @@
             <div class="col-md-6 mb-3">
                 <label for="id">id</label>
                 <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id"
-                    value="{{ old('id') ?? $book->id}}">
+                    value="{{ old('id') ?? $author->id}}">
                 @error('id')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
-            {{-- judul --}}
+            {{-- nama --}}
             <div class="col-md-6 mb-3">
-                <label for="judul">judul</label>
-                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul"
-                    id="judul" value="{{ old('judul') ?? $book->judul }}">
-                @error('judul')
+                <label for="nama">nama</label>
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                    id="nama" value="{{ old('nama') ?? $author->nama }}">
+                @error('nama')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -31,32 +31,22 @@
 
 
         <div class="row">
-            {{-- halaman --}}
+            {{-- kota --}}
             <div class="col-md-6 mb-3">
-                <label for="halaman">halaman</label>
-                <input type="text" class="form-control @error('halaman') is-invalid @enderror" name="halaman"
-                    id="halaman" value="{{ old('halaman') ?? $book->halaman}}">
-                @error('halaman')
+                <label for="kota">kota</label>
+                <input type="text" class="form-control @error('kota') is-invalid @enderror" name="kota"
+                    id="kota" value="{{ old('kota') ?? $author->kota}}">
+                @error('kota')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
-            {{-- kategori --}}
+            {{-- negara --}}
             <div class="col-md-6 mb-3">
-                <label for="kategori">kategori</label>
-                <input type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori"
-                    id="kategori" value="{{ old('kategori') ?? $book->kategori}}">
-                @error('kategori')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            {{-- penerbit --}}
-            <div class="col-md-6 mb-3">
-                <label for="penerbit">penerbit</label>
-                <input type="text" class="form-control @error('penerbit') is-invalid @enderror" name="penerbit"
-                    id="penerbit" value="{{ old('penerbit') ?? $book->penerbit}}">
-                @error('penerbit')
+                <label for="negara">negara</label>
+                <input type="text" class="form-control @error('negara') is-invalid @enderror" name="negara"
+                    id="negara" value="{{ old('negara') ?? $author->negara}}">
+                @error('negara')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
