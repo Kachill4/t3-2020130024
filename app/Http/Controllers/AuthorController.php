@@ -14,7 +14,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = author::all();
+        return view('authors.index', compact('authors'));
     }
 
     /**
@@ -24,7 +25,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('authors.create');
     }
 
     /**
@@ -35,7 +36,17 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'nama'      => 'required|max:255',
+            'kota'      => 'required|date',
+            'negara'    => 'required|max:255'
+        ];
+
+        $validated = $request->validate($rules);
+        author::create($validated);
+        $request->session()
+            ->flash('success', "Author  <b> {$validated['nama']} </b> ditambahkan!");
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -46,7 +57,7 @@ class AuthorController extends Controller
      */
     public function show(author $author)
     {
-        //
+        return view('authors.show', compact('author'));
     }
 
     /**
@@ -57,7 +68,7 @@ class AuthorController extends Controller
      */
     public function edit(author $author)
     {
-        //
+        return view('authors.edit', compact('author'));
     }
 
     /**
@@ -69,7 +80,17 @@ class AuthorController extends Controller
      */
     public function update(Request $request, author $author)
     {
-        //
+        $rules = [
+            'nama'      => 'required|max:255',
+            'tglLahir'  => 'required|date',
+            'kota'      => 'required|max:255',
+            'email'     => 'required|max:255'
+        ];
+        $validated = $request->validate($rules);
+        $author->update($validated);
+        $request->session()
+                ->flash('success', "Profile  {$validated['nama']}  berhasil di Update!");
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -80,6 +101,8 @@ class AuthorController extends Controller
      */
     public function destroy(author $author)
     {
-        //
+        $author->delete();
+        return redirect()->route('authors.index')
+                ->with('success', "Profile  {$author['nama']}  berhasil di hapus!");
     }
 }
